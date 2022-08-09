@@ -4,6 +4,10 @@ public class Nave {
 	private int x;
 	private int y;
 	
+	public Nave() {
+		
+	}
+	
 	public int getX() {
 		return x;
 	}
@@ -15,5 +19,9 @@ public class Nave {
 	}
 	public void setY(int y) {
 		this.y = y;
+	}
+	
+	public void drawShip() {
+		
 	}
 }
