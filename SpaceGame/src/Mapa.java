@@ -4,6 +4,8 @@ import javax.swing.JOptionPane;
 public class Mapa {
 	
 	Controls controle = new Controls();
+	Nave ship = new Nave();
+	Nave enemy = new Nave();
 	
 	
 	public Mapa() {
