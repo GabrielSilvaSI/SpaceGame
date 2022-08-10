@@ -20,7 +20,7 @@ public class Mapa {
                         if((xPlayer==j)&&(yPlayer==i)){
                             matriz[i][j] = '^';
                         }else{
-                            matriz[i][j] = '0';
+                            matriz[i][j] = ' ';
                         }
                     }
                     acm+= matriz[i][j]+"   ";
