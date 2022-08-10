@@ -4,6 +4,7 @@
  */
 package spaceshipgame;
 
+import java.awt.Color;
 import java.util.Random;
 import javax.swing.JOptionPane;
 
@@ -21,8 +22,7 @@ public final class Screen extends javax.swing.JFrame {
      */
     public Screen() {
         initComponents();
-        enemy.setX(random.nextInt(9));
-        enemy.setY(random.nextInt(9));
+        EnemyRandom();
         player.setX(4);
         player.setY(9);
         PrintScreen();
@@ -51,7 +51,7 @@ public final class Screen extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Spaceship Game");
         setResizable(false);
 
@@ -106,7 +106,7 @@ public final class Screen extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Player");
 
-        enemyLife.setValue(100);
+        enemyLife.setValue(20);
 
         jLabel3.setText("0              50             100");
 
@@ -215,13 +215,13 @@ public final class Screen extends javax.swing.JFrame {
     private void btFireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFireActionPerformed
         if((player.getX()==enemy.getX())||(player.getY()==enemy.getY())){
             enemyLife.setValue(enemyLife.getValue()-10);
+            EnemyRandom();
+            PrintScreen();
         }
     }//GEN-LAST:event_btFireActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
+    
+    public void tela() {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -250,8 +250,24 @@ public final class Screen extends javax.swing.JFrame {
 
     
     public void PrintScreen(){
+        if(life.getValue()<=0){
+            tfArea.setText("");
+            tfArea.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Você morreu!");
+            this.dispose();
+            Continue();
+        }else{
+            if(enemyLife.getValue()<=0){
+                tfArea.setText("");
+                tfArea.setBackground(Color.green);
+                JOptionPane.showMessageDialog(null, "Você venceu!");
+                this.dispose();
+                Continue();
+            }else{
+                tfArea.setText(map.attShips(player.getX(),player.getY(),enemy.getX(),enemy.getY()));
+            }
+        }
         
-        tfArea.setText(map.attShips(player.getX(),player.getY(),enemy.getX(),enemy.getY()));
     }
     
     public void MoveEnemey(){
@@ -284,8 +300,7 @@ public final class Screen extends javax.swing.JFrame {
         }
         if((player.getX()==enemy.getX())&&(player.getY()==enemy.getY())){
             playerLife();
-            enemy.setX(random.nextInt(9));
-            enemy.setY(random.nextInt(9));
+            EnemyRandom();
         }
         PrintScreen();
     }
@@ -306,5 +321,18 @@ public final class Screen extends javax.swing.JFrame {
 
     private void playerLife() {
         life.setValue(life.getValue()-1);
+    }
+    
+    private void EnemyRandom(){
+        enemy.setX(random.nextInt(9));
+        enemy.setY(random.nextInt(9));
+    }
+    
+    private void Continue(){
+        int i = JOptionPane.showConfirmDialog(null, "Deseja jogar novamente?","Escolha", JOptionPane.YES_NO_OPTION);
+        if(i==0){
+            Screen sc = new Screen();
+            sc.tela();
+        }
     }
 }
