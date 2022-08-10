@@ -1,3 +1,5 @@
+package spaceshipgame;
+
 
 public class Nave {
 	
