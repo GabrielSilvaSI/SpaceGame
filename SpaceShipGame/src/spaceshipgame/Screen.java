@@ -106,7 +106,7 @@ public final class Screen extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Player");
 
-        enemyLife.setValue(20);
+        enemyLife.setValue(100);
 
         jLabel3.setText("0              50             100");
 
